@@ -3,3 +3,4 @@ luac.out
 
 # Ingnore
 .vs/*
+.vscode/settings.json

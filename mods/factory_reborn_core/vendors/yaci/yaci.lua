@@ -7,6 +7,8 @@
 -- Thanks to Damian Stewart and Frederic Thomas for their interest and comments
 -----------------------------------------------------------------------------------
 
+FactoryRebornCore.Debug("Yaci Loading")
+
 do	-- keep local things inside
 
 -- associations between an object an its meta-informations
@@ -214,14 +216,16 @@ setmetatable(Object, { __newindex = obj_newitem, __index = obj_class_stuff,
 	__tostring = tos, __call = newInstance } )
 
 ----------------------------------------------------------------------
--- function 'newclass'
+-- function 'createClass'
 
-function newclass(name, baseClass)
+function createClass(name, baseClass)
  baseClass = baseClass or Object
  return baseClass:subclass(name)
 end
 
-end -- 2 global things remain: 'Object' and 'newclass'
+end -- 2 global things remain: 'Object' and 'createClass'
+
+FactoryRebornCore.Debug("Yaci Loaded")
 
 -- end of code
 
