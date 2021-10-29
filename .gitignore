@@ -2,6 +2,4 @@
 luac.out
 
 # Ingnore
-.vs/slnx.sqlite
-.vs/factory_reborn/v16/.suo
-.vs/VSWorkspaceState.json
+.vs/*
