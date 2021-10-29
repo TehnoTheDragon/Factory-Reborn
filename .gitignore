@@ -30,7 +30,6 @@ luac.out
 *.so
 *.so.*
 *.dylib
-.vs.*
 
 # Executables
 *.exe
@@ -40,3 +39,4 @@ luac.out
 *.x86_64
 *.hex
 
+.vs/slnx.sqlite
