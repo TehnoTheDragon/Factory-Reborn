@@ -2,6 +2,7 @@
 local grass_texture = "factory_reborn_test_grass.png" 
 local stone_texture = "factory_reborn_test_stone.png"
 local mask_ore_light = "factory_reborn_test_mask_ore_light.png"
+local mask_ore_light_second = "factory_reborn_test_mask_ore_light_second.png"
 local mask_ore_dark = "factory_reborn_test_mask_ore_dark.png"
 
 -- Blocks
@@ -17,29 +18,26 @@ minetest.register_node("factory_reborn_test:stone", {
 
 ---automatic register node & generate texture for itself
 ---@param ore_name string
----@param pre_invert boolean
----@param color string
-local function auto_createOre(ore_name, pre_invert, color)
+---@param color string (light color if second_color isn't nil)
+---@param second_color string (dark color)
+local function auto_createOre(ore_name, color, second_color)
     -- safe asserting
-    pre_invert = pre_invert == nil and true or pre_invert
     color = color or "#ffffff"
 
     -- create local dark & light textures
-    local dark = mask_ore_dark
-    local light = mask_ore_light
-
-    -- invert them colors if pre_invert is true
-    if pre_invert then
-        dark = dark .. "^[invert:rgb"
-        light = light .. "^[invert:rgb"
-    end
+    local dark, light
 
     -- multiply each textures to selected color
-    dark = dark .. ("^[multiply:%s"):format(color)
-    light = light .. ("^[multiply:%s"):format(color)
+    if second_color == nil then
+        dark = ("(%s^[multiply:%s)"):format(mask_ore_dark, color)
+        light = ("(%s^[multiply:%s)"):format(mask_ore_light, color)
+    else
+        dark = ("%s^[multiply:%s"):format(mask_ore_light_second, second_color)
+        light = ("%s^[multiply:%s"):format(mask_ore_light, color)
+    end
 
     -- combine texture in one
-    local ore_texture = ("(%s^%s)"):format(dark, light)
+    local ore_texture = ("(%s)^(%s)"):format(dark, light)
 
     -- register node
     minetest.register_node(("factory_reborn_test:%s"):format(ore_name:lower():gsub(" ", "_")), {
@@ -48,15 +46,16 @@ local function auto_createOre(ore_name, pre_invert, color)
     })
 end
 
-auto_createOre("Coal", false, "#202020")
-auto_createOre("Iron", false, "#ffffff")
+auto_createOre("Coal", "#2f2f2f")
+auto_createOre("Iron", "#FAD09F")
+auto_createOre("Lead", "#A98EC5", "#A086BB")
 
 -- Map-Gens
 
 minetest.register_alias("mapgen_grass", "factory_reborn_test:grass")
 minetest.register_alias("mapgen_stone", "factory_reborn_test:stone")
 minetest.register_alias("mapgen_ore_coal", "factory_reborn_test:coal")
-minetest.register_alias("mapgen_ore_iron", "factory_reborn_test:iron")
+minetest.register_alias("mapgen_ore_lead", "factory_reborn_test:lead")
 
 function mapgenOverride()
     minetest.register_ore({
@@ -85,6 +84,17 @@ function mapgenOverride()
 		clust_scarcity = 9 * 9 * 9,
         clust_num_ores = 12,
 		clust_size     = 3,
+		y_max          = 31000,
+		y_min          = -1000,
+	})
+
+    minetest.register_ore({
+		ore_type       = "scatter",
+		ore            = "factory_reborn_test:lead",
+		wherein        = "factory_reborn_test:stone",
+		clust_scarcity = 6 * 9 * 6,
+        clust_num_ores = 12,
+		clust_size     = 5,
 		y_max          = 31000,
 		y_min          = -1000,
 	})
