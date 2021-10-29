@@ -31,11 +31,19 @@ FactoryRebornCore.Debug("Loading")
 
 --#endregion
 
+--#region Vendors
+
+FactoryRebornCore.Debug("Vendors Begin!")
+
+FactoryRebornCore.RelativeModLoad("vendors/yaci/yaci.lua")
+
+FactoryRebornCore.Debug("Vendors Done!")
+
+--#endregion
+
 --#region Pre Init
 
 FactoryRebornCore.Debug("Pre Init...")
-
-FactoryRebornCore.RelativeModLoad("vendors/yaci/yaci.lua")
 
 FactoryRebornCore.Debug("Pre Inited")
 

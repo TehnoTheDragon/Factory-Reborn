@@ -219,8 +219,8 @@ setmetatable(Object, { __newindex = obj_newitem, __index = obj_class_stuff,
 -- function 'createClass'
 
 function createClass(name, baseClass)
- baseClass = baseClass or Object
- return baseClass:subclass(name)
+  baseClass = baseClass or Object
+  return baseClass:subclass(name)
 end
 
 end -- 2 global things remain: 'Object' and 'createClass'
