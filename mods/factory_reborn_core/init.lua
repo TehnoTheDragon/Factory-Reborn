@@ -45,6 +45,8 @@ FactoryRebornCore.Debug("Vendors Done!")
 
 FactoryRebornCore.Debug("Pre Init...")
 
+FactoryRebornCore.RelativeModLoad("core/Core.lua")
+
 FactoryRebornCore.Debug("Pre Inited")
 
 --#endregion

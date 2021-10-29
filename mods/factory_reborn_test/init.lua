@@ -1,3 +1,5 @@
+FactoryRebornCore.Debug("Test Environment!")
+
 -- Mask Textures
 local grass_texture = "factory_reborn_test_grass.png" 
 local stone_texture = "factory_reborn_test_stone.png"
