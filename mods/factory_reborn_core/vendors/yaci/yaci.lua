@@ -7,8 +7,6 @@
 -- Thanks to Damian Stewart and Frederic Thomas for their interest and comments
 -----------------------------------------------------------------------------------
 
-FactoryRebornCore.Debug("Yaci Loading")
-
 do	-- keep local things inside
 
 -- associations between an object an its meta-informations

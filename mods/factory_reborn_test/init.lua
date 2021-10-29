@@ -8,7 +8,10 @@ local mask_ore_light_second = "factory_reborn_test_mask_ore_light_second.png"
 local mask_ore_dark = "factory_reborn_test_mask_ore_dark.png"
 
 -- Blocks
-minetest.register_node("factory_reborn_test:grass", {
+
+
+-- Blocks
+--[[minetest.register_node("factory_reborn_test:grass", {
     description = "Grass",
     tiles = {grass_texture}
 })
@@ -114,4 +117,4 @@ minetest.clear_registered_biomes()
 minetest.clear_registered_ores()
 minetest.clear_registered_decorations()
 
-mapgenOverride()
+mapgenOverride()]]

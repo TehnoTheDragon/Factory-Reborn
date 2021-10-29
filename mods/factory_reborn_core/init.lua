@@ -33,17 +33,15 @@ FactoryRebornCore.Debug("Loading")
 
 --#region Vendors
 
-FactoryRebornCore.Debug("Vendors Begin!")
+FactoryRebornCore.Debug("Vendors Loader Begin...")
 
 FactoryRebornCore.RelativeModLoad("vendors/yaci/yaci.lua")
 
-FactoryRebornCore.Debug("Vendors Done!")
+FactoryRebornCore.Debug("Vendors Loader Done!")
 
 --#endregion
 
 --#region Pre Init
-
-FactoryRebornCore.Debug("Pre Init...")
 
 FactoryRebornCore.RelativeModLoad("core/Core.lua")
 
@@ -52,8 +50,6 @@ FactoryRebornCore.Debug("Pre Inited")
 --#endregion
 
 --#region Post Init
-
-FactoryRebornCore.Debug("Post Init...")
 
 FactoryRebornCore.Debug("Post Inited")
 
