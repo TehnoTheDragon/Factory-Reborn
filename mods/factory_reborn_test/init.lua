@@ -8,7 +8,19 @@ local mask_ore_light_second = "factory_reborn_test_mask_ore_light_second.png"
 local mask_ore_dark = "factory_reborn_test_mask_ore_dark.png"
 
 -- Blocks
+local Block = FactoryRebornCore.Core.World.Block
 
+local GrassBlock = Block.BaseBlock("grass")
+GrassBlock:SetTextures(grass_texture)
+GrassBlock:registry()
+
+local StoneBlock = Block.BaseBlock("stone")
+StoneBlock:SetTextures(stone_texture)
+StoneBlock:registry()
+
+local CoalOreBlock = Block.BaseBlock("coal")
+CoalOreBlock:SetTextures(stone_texture .. "^" .. mask_ore_dark .. "^" .. mask_ore_light)
+CoalOreBlock:registry()
 
 -- Blocks
 --[[minetest.register_node("factory_reborn_test:grass", {
@@ -55,12 +67,13 @@ auto_createOre("Coal", "#2f2f2f")
 auto_createOre("Iron", "#FAD09F")
 auto_createOre("Lead", "#A98EC5", "#A086BB")
 
--- Map-Gens
+-- Map-Gens]]
 
 minetest.register_alias("mapgen_grass", "factory_reborn_test:grass")
 minetest.register_alias("mapgen_stone", "factory_reborn_test:stone")
 minetest.register_alias("mapgen_ore_coal", "factory_reborn_test:coal")
-minetest.register_alias("mapgen_ore_lead", "factory_reborn_test:lead")
+--minetest.register_alias("mapgen_ore_iron", "factory_reborn_test:iron")
+--minetest.register_alias("mapgen_ore_lead", "factory_reborn_test:lead")
 
 function mapgenOverride()
     minetest.register_ore({
@@ -82,7 +95,7 @@ function mapgenOverride()
 		},
 	})
 
-    minetest.register_ore({
+    --[[minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "factory_reborn_test:iron",
 		wherein        = "factory_reborn_test:stone",
@@ -102,7 +115,7 @@ function mapgenOverride()
 		clust_size     = 5,
 		y_max          = 31000,
 		y_min          = -1000,
-	})
+	})]]
 
     minetest.register_biome({
 		name = "grassland",
@@ -117,4 +130,4 @@ minetest.clear_registered_biomes()
 minetest.clear_registered_ores()
 minetest.clear_registered_decorations()
 
-mapgenOverride()]]
+mapgenOverride()

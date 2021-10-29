@@ -2,6 +2,16 @@
 
 _G.FactoryRebornCore = {}
 
+FactoryRebornCore.Enum = {}
+FactoryRebornCore.Enum.LogType = {
+    None = "none",
+    Warning = "warning",
+    Error = "error",
+    Action = "action",
+    Info = "info",
+    Verbose = "verbose"
+}
+
 ---Just interface of ```minetest.get_current_modname()```
 ---@return string
 function FactoryRebornCore.CurrentModname()
@@ -24,7 +34,11 @@ end
 
 ---Like minetest but a little bit improvment
 function FactoryRebornCore.Debug(...)
-    minetest.debug(("[Debug][%s]: %s"):format(FactoryRebornCore.CurrentModname(), ...))
+    FactoryRebornCore.Log(FactoryRebornCore.Enum.LogType.Info, ...)
+end
+
+function FactoryRebornCore.Log(logtype, ...)
+    minetest.log(logtype, table.concat({...}, "\t"))
 end
 
 FactoryRebornCore.Debug("Loading")

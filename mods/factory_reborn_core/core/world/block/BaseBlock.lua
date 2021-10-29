@@ -10,16 +10,27 @@ FactoryRebornCore.Core.World.Block.BaseBlock = BaseBlock
 function BaseBlock:init(registry_name)
     local modname = FactoryRebornCore.CurrentModname()
     self.registry_name = ("%s:%s"):format(modname, registry_name:lower():gsub(" ", "_"))
+    self.textures = {"NaN.png"}
 end
 
----Should use every time when you want override new options
-function BaseBlock:apply()
-    
+---Setting textures
+---@param tiles table | string
+function BaseBlock:SetTextures(tiles)
+    local tile = {"NaN.png"}
+    if (type(tiles) == "table") then
+        tile = tiles
+    elseif (type(tiles) == "string") then
+        tile[1] = tiles
+    else
+        FactoryRebornCore.Log(FactoryRebornCore.Enum.LogType.Error, "BaseBlock:SetTexture(), got unsupported type of tiles!")
+    end
+    self.textures = tile
 end
 
 ---Register this block in minetest, it's can be used only once!
 function BaseBlock:registry()
     minetest.register_node(self.registry_name, {
-        description = self.registry_name
+        description = self.registry_name,
+        tiles = self.textures
     })
 end
