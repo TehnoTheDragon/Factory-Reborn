@@ -11,6 +11,7 @@ function BaseBlock:init(registry_name)
     local modname = FactoryRebornCore.CurrentModname()
     self.registry_name = ("%s:%s"):format(modname, registry_name:lower():gsub(" ", "_"))
     self.textures = {"NaN.png"}
+    self.node = nil
 end
 
 ---Setting textures
@@ -28,9 +29,10 @@ function BaseBlock:SetTextures(tiles)
 end
 
 ---Register this block in minetest, it's can be used only once!
-function BaseBlock:registry()
-    minetest.register_node(self.registry_name, {
+function BaseBlock:Registry()
+    self.node = minetest.register_node(self.registry_name, {
         description = self.registry_name,
         tiles = self.textures
     })
+    FactoryRebornCore.Core.World.Block.BlocksStorage.SaveIt(self.registry_name, self)
 end
