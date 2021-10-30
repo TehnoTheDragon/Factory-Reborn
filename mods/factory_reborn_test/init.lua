@@ -11,6 +11,7 @@ local grass_texture = ("(%s^[multiply:#AEC862)"):format(white_blank_texture)
 local stone_texture = ("(%s^[multiply:#808080)"):format(white_blank_texture)
 local sand_texture = ("(%s^[multiply:#F2E68F)"):format(white_blank_texture)
 local dirt_texture = ("(%s^[multiply:#C28F43)"):format(white_blank_texture)
+local water_texture = ("(%s^[multiply:#87DFF2)"):format(white_blank_texture)
 
 -- Blocks
 local Block = FactoryRebornCore.Core.World.Block
@@ -30,6 +31,22 @@ SandBlock:Registry()
 local DirtBlock = Block.BaseBlock("dirt")
 DirtBlock:SetTextures(dirt_texture)
 DirtBlock:Registry()
+
+minetest.register_node("factory_reborn_test:water", {
+	description = "water",
+	tiles = {("%s^[opacity:200"):format(water_texture)},
+	drawtype = "liquid",
+	paramtype = "light",
+	liquid_alternative_flowing = "air",
+	liquid_viscosity = 0.6,
+	alpha = 200,
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	drowing = 1,
+	post_effect_color = {a=80, r=135, g=223, b=242},
+})
 
 ---automatic register node & generate texture for itself
 ---@param ore_name string
@@ -72,6 +89,7 @@ minetest.register_alias("mapgen_stone", "factory_reborn_test:stone")
 minetest.register_alias("mapgen_ore_coal", "factory_reborn_test:coal")
 minetest.register_alias("mapgen_ore_iron", "factory_reborn_test:iron")
 minetest.register_alias("mapgen_ore_lead", "factory_reborn_test:lead")
+minetest.register_alias("mapgen_water_source", "factory_reborn_test:water")
 
 function mapgenOverride()
     minetest.register_ore({
