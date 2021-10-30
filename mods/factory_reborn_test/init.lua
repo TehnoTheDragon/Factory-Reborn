@@ -9,6 +9,8 @@ local mask_ore_dark = "factory_reborn_test_mask_ore_dark.png"
 -- Formatted Textures
 local grass_texture = ("(%s^[multiply:#AEC862)"):format(white_blank_texture)
 local stone_texture = ("(%s^[multiply:#808080)"):format(white_blank_texture)
+local sand_texture = ("(%s^[multiply:#F2E68F)"):format(white_blank_texture)
+local dirt_texture = ("(%s^[multiply:#C28F43)"):format(white_blank_texture)
 
 -- Blocks
 local Block = FactoryRebornCore.Core.World.Block
@@ -20,6 +22,14 @@ GrassBlock:Registry()
 local StoneBlock = Block.BaseBlock("stone")
 StoneBlock:SetTextures(stone_texture)
 StoneBlock:Registry()
+
+local SandBlock = Block.BaseBlock("sand")
+SandBlock:SetTextures(sand_texture)
+SandBlock:Registry()
+
+local DirtBlock = Block.BaseBlock("dirt")
+DirtBlock:SetTextures(dirt_texture)
+DirtBlock:Registry()
 
 ---automatic register node & generate texture for itself
 ---@param ore_name string
@@ -67,19 +77,20 @@ function mapgenOverride()
     minetest.register_ore({
 		ore_type       = "blob",
 		ore            = "factory_reborn_test:coal",
-		wherein        = "factory_reborn_test:stone",
+		wherein        = {"factory_reborn_test:stone"},
 		clust_scarcity = 12 * 12 * 12,
-		clust_size     = 4,
+		clust_size     = 5,
 		y_max          = 31000,
 		y_min          = -1000,
-        noise_threshold = 0.1,
+        noise_threshold = 0.2,
 		noise_params    = {
 			offset = 0.5,
-			scale = 0.3,
-			spread = {x = 8, y = 3, z = 8},
+			scale = 0.2,
+			spread = {x = 8, y = 5, z = 3},
 			seed = 766,
-			octaves = 1.3,
-			persist = 0.1
+			octaves = 1,
+			persist = 0.6,
+			lacunarity = 2,
 		},
 	})
 
@@ -109,9 +120,30 @@ function mapgenOverride()
 		name = "grassland",
 		node_top = "factory_reborn_test:grass",
 		depth_top = 1,
+		node_filler = "factory_reborn_test:dirt",
+		depth_filler = 3,
+		node_riverbed = "factory_reborn_test:sand",
+		depth_riverbed = 2,
 		y_max = 31000,
 		y_min = 4,
 	})
+
+	--[[minetest.register_decoration({
+		deco_type = "simple",
+		place_on = {"factory_reborn_test:stone", "factory_reborn_test:grass"},
+		sidelen = 1,
+		noise_params = {
+			offset = 0,
+			scale = 1,
+			spread = {x = 5, y = 5, z = 5},
+			seed = 51,
+			octaves = 1,
+			persist = 0.2,
+		},
+		y_min = -50,
+		y_max = 100,
+		decoration = "factory_reborn_test:none"
+	})]]
 end
 
 minetest.clear_registered_biomes()
