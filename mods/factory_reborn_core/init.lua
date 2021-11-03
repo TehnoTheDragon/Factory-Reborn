@@ -38,7 +38,7 @@ function FactoryRebornCore.Debug(...)
 end
 
 function FactoryRebornCore.Log(logtype, ...)
-    minetest.log(logtype, table.concat({...}, "\t"))
+    minetest.log(table.concat({...}, "\t"))
 end
 
 FactoryRebornCore.Debug("Loading")
